@@ -78,7 +78,7 @@
     font-weight: $fw-bold;
 }
 
-.mt-5.course-list {
+.mt-4.course-list {
     padding-top: $sp-7;
     overflow: hidden;
     .slick-prev {
@@ -87,13 +87,13 @@
         z-index: 1;
         width: 50px;
         height: 100px;
-        color: #ccc;
+        color: $darkRed;
         transition: color 0.2s;
     }
     .slick-next {
         top: 400px;
         right: -50px;
-        color: #ccc;
+        color: $darkRed;
         width: 50px;
         height: 100px;
         transition: color 0.2s;
