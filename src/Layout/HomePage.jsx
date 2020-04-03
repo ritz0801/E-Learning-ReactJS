@@ -1,9 +1,13 @@
 import React from 'react';
 import BannerCarousel from '../Components/BannerCarousel'
+import CourseList from '../Components/CourseList';
 
 const HomePage = () => {
     return (
-        <BannerCarousel />
+        <React.Fragment>
+            <BannerCarousel />
+            <CourseList />
+        </React.Fragment>
     );
 };
 

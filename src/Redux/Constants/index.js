@@ -1,0 +1,1 @@
+export const GET_COURSES_LIST = "GET_COURSES_LIST";
