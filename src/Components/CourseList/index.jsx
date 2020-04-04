@@ -48,8 +48,25 @@ const CourseList = (props) => {
         prevArrow: <PrevArrow />
     };
 
-    const renderCoursesList = () => {
-        return props.coursesList.map((course, index) => {
+    // const renderCourseList = () => {
+    //     return props.coursesList.map((course, index) => {
+    //         return (
+    //             <div
+    //                 key={index}
+    //                 className="col-md-3 col-sm-6 col-xs-12 w-25 d-inline-block course-item_container"
+    //             >
+    //                 <CourseItem course={course} />
+    //             </div>
+    //         );
+    //     });
+    // }
+
+    const renderCoursesListByCatalog = (catalog) => {
+        let courseListByCatalog = props.coursesList.filter((course) => {
+            return course.maDanhMuc === catalog
+        })
+
+        return courseListByCatalog.map((course, index) => {
             return (
                 <div
                     key={index}
@@ -106,7 +123,7 @@ const CourseList = (props) => {
                 <div className="tab-pane fade show active" id="pills-frontendCourses">
                     <Slider {...settings} className="courses-list container">
                         {isLoading
-                            ? Array.from({ length: 8 }).map((item, index) => {
+                            ? Array.from({ length: 4 }).map((item, index) => {
                                 return (
                                     <div
                                         key={index}
@@ -116,23 +133,22 @@ const CourseList = (props) => {
                                     </div>
                                 );
                             })
-                            : renderCoursesList()}
-                        {}
+                            : renderCoursesListByCatalog("Frontend")}
                     </Slider>
                 </div>
                 <div className="tab-pane fade" id="pills-backendCourses" role="tabpanel">
                     <Slider {...settings} className="courses-list container">
-                        {renderCoursesList()}
+                        {renderCoursesListByCatalog("Backend")}
                     </Slider>
                 </div>
                 <div className="tab-pane fade" id="pills-mobileCourses" role="tabpanel">
                     <Slider {...settings} className="courses-list container">
-                        {renderCoursesList()}
+                        {renderCoursesListByCatalog("Mobile")}
                     </Slider>
                 </div>
                 <div className="tab-pane fade" id="pills-designCourses" role="tabpanel">
                     <Slider {...settings} className="courses-list container">
-                        {renderCoursesList()}
+                        {renderCoursesListByCatalog("Design")}
                     </Slider>
                 </div>
             </div>
