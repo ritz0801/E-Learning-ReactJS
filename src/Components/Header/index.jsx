@@ -91,7 +91,7 @@ const Header = () => {
                 </button>
             </nav>
 
-            //Form đăng nhập
+            {/* Form đăng nhập */}
             <Dialog open={openLogin} onClose={handleCloseLogin} aria-labelledby="form-dialog-title" fullWidth={fullWidth} maxWidth={maxWidth}>
                 <DialogTitle id="form-dialog-title">ĐĂNG NHẬP</DialogTitle>
                 <DialogContent>
@@ -127,7 +127,7 @@ const Header = () => {
                 </DialogContent>
             </Dialog>
 
-            //Form đăng ký
+            {/* Form đăng ký */}
             <Dialog open={openRegister} onClose={handleCloseRegister} aria-labelledby="form-dialog-title" fullWidth={fullWidth} maxWidth={maxWidth}>
                 <DialogTitle id="form-dialog-title">ĐĂNG KÝ</DialogTitle>
                 <DialogContent>
