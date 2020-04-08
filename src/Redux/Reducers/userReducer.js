@@ -13,7 +13,7 @@ const userReducer = (state = initialState, action) => {
         //   return action.user;
         // }
         case types.LOGIN: {
-            localStorage.setItem("user", JSON.stringify(action.user));
+            localStorage.setItem("user", JSON.stringify(action.user.taiKhoan + action.user.token));
             return action.user;
         }
         case types.LOGOUT: {

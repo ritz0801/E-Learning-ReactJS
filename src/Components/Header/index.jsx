@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { NavLink, withRouter } from "react-router-dom";
 import logo from '../../Assets/img/logoelearning.jpg';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import { Button, Menu, MenuItem } from "@material-ui/core";
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import { connect } from 'react-redux';
+import apiUser from '../../API/user';
+import { login, register, logout } from '../../Redux/Actions/user';
+import Swal from "sweetalert2";
+import userDefault from '../../Assets/img/user-default.png';
 
-const Header = () => {
+const Header = (props) => {
     const [openLogin, setOpenLogin] = useState(false);
     const [openRegister, setOpenRegister] = useState(false);
+    const [anchorEl, setAnchorEl] = React.useState(null);
     const [fullWidth, setFullWidth] = React.useState(true);
     const [maxWidth, setMaxWidth] = React.useState('sm');
 
@@ -33,6 +36,14 @@ const Header = () => {
         setOpenRegister(false);
     };
 
+    const handleClickAnchorElClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    }
+
+    const handleCloseAnchorEl = () => {
+        setAnchorEl(null);
+    }
+
     const registerSchema = yup.object().shape({
         hoTen: yup.string().required('* Không được bỏ trống!'),
         taiKhoan: yup.string().required('* Không được bỏ trống!'),
@@ -45,6 +56,41 @@ const Header = () => {
         taiKhoan: yup.string().required('* Không được bỏ trống!'),
         matKhau: yup.string().required('* Không được bỏ trống!'),
     })
+
+    const renderButtonLoginAndRegister = () => {
+        const token = localStorage.getItem("user");
+        if (token) {
+            return <div className="user">
+                <Button className="btn-user" onClick={event => { handleClickAnchorElClick(event) }}>
+                    <img src={userDefault} alt="user image" />
+                    <p>{props.user.hoTen}</p>
+                </Button>
+                <Menu
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleCloseAnchorEl}
+                    className="dropdown-user"
+                >
+                    <MenuItem onClick={handleCloseAnchorEl}>Thông tin cá nhân</MenuItem>
+                    <MenuItem
+                        onClick={() => {
+                            handleCloseAnchorEl();
+                            props.logout();
+                        }}
+                    >
+                        Đăng xuất
+                    </MenuItem>
+                </Menu>
+            </div>
+        }
+        else {
+            return <div className="button d-flex">
+                <button className="btn mr-1 btn--white" type="submit" onClick={handleClicLoginkOpen}>Đăng nhập</button>
+                <button className="btn btn--red" type="submit" onClick={handleClickRegisterOpen}>Đăng ký</button>
+            </div>
+        }
+    }
 
     return (
         <header className="container-fluid myNavBar">
@@ -77,10 +123,9 @@ const Header = () => {
                                 <i className="fa fa-shopping-cart" />
                             </li>
                             <li className="nav-item ">
-                                <div className="button d-flex">
-                                    <button className="btn mr-1 btn--white" type="submit" onClick={handleClicLoginkOpen}>Đăng nhập</button>
-                                    <button className="btn btn--red" type="submit" onClick={handleClickRegisterOpen}>Đăng ký</button>
-                                </div>
+                                {
+                                    renderButtonLoginAndRegister()
+                                }
                             </li>
                         </ul>
                     </div>
@@ -101,7 +146,31 @@ const Header = () => {
                             matKhau: '',
                         }}
                         validationSchema={loginSchema}
-                        // onSubmit={}
+                        onSubmit={values => {
+                            apiUser
+                                .post("DangNhap", values)
+                                .then(result => {
+                                    props.login(result.data.user);
+                                })
+                                .then(() => {
+                                    Swal.fire({
+                                        title: 'Bạn đã đăng nhập thành công',
+                                        icon: 'success',
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'Ok'
+                                    })
+                                })
+                                .catch((err) => {
+                                    if (err.response.status === 400) {
+                                        Swal.fire({
+                                            title: 'Tài khoản hoặc mật khẩu không đúng!',
+                                            icon: 'error',
+                                            confirmButtonColor: '#e74c3c',
+                                            confirmButtonText: 'Ok'
+                                        }).then(() => handleClicLoginkOpen())
+                                    }
+                                })
+                        }}
                         render={(formikProps) => {
                             return <Form>
                                 <div className="form-group">
@@ -120,7 +189,7 @@ const Header = () => {
                                 </div>
                                 <div className="text-center">
                                     <Button onClick={handleCloseLogin}>Cancel</Button>
-                                    <button onClick={handleCloseLogin} disabled={!(formikProps.isValid && formikProps.dirty)} className="btn btn-danger m-2">ĐĂNG NHẬP</button>
+                                    <button type="submit" onClick={handleCloseLogin} disabled={!(formikProps.isValid && formikProps.dirty)} className="btn btn-danger m-2">ĐĂNG NHẬP</button>
                                 </div>
                             </Form>
                         }} />
@@ -140,9 +209,21 @@ const Header = () => {
                             email: '',
                         }}
                         validationSchema={registerSchema}
-                        // onSubmit={}
+                        onSubmit={values => {
+                            apiUser
+                                .post("DangKy", values)
+                                .then((result) => {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Đăng kí thành công",
+                                        confirmButtonColor: '#e74c3c',
+                                        confirmButtonText: 'Ok'
+                                    })
+                                })
+                                .catch(err => console.login(err))
+                        }}
                         render={(formikProps) => {
-                            return <Form>
+                            return <Form >
                                 <div className="form-group">
                                     <label htmlFor="hoTen">Họ tên: </label>
                                     <Field id="hoTen" type="text" className="form-control" name="hoTen" onChange={formikProps.handleChange} />
@@ -180,7 +261,7 @@ const Header = () => {
                                 </div>
                                 <div className="text-center">
                                     <Button onClick={handleCloseRegister}>Cancel</Button>
-                                    <button onClick={handleCloseRegister} disabled={!(formikProps.isValid && formikProps.dirty)} className="btn btn-danger m-2">ĐĂNG KÝ</button>
+                                    <button type="submit" onClick={handleCloseRegister} disabled={!(formikProps.isValid && formikProps.dirty)} className="btn btn-danger m-2">ĐĂNG KÝ</button>
                                 </div>
                             </Form>
                         }} />
@@ -190,6 +271,24 @@ const Header = () => {
     );
 };
 
+const mapStateToProps = (state) => {
+    return {
+        user: state.userReducer,
+    }
+}
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (user) => {
+            dispatch(login(user));
+        },
+        register: (user) => {
+            dispatch(register(user));
+        },
+        logout: () => {
+            dispatch(logout());
+        }
+    }
+}
 
-export default withRouter(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
