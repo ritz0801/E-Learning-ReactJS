@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, withRouter } from "react-router-dom";
 import logo from '../../Assets/img/logoelearning.jpg';
 import { Button, Menu, MenuItem } from "@material-ui/core";
@@ -14,6 +14,16 @@ import Swal from "sweetalert2";
 import userDefault from '../../Assets/img/user-default.png';
 
 const Header = (props) => {
+    const token = localStorage.getItem("token");
+    const userLocalStorage = localStorage.getItem("user");
+    const userLocalStorageParse = JSON.parse(userLocalStorage);
+
+    useEffect(() => {
+        if (token && userLocalStorage) {
+            props.login(userLocalStorageParse);
+        }
+    }, [])
+
     const [openLogin, setOpenLogin] = useState(false);
     const [openRegister, setOpenRegister] = useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -58,12 +68,11 @@ const Header = (props) => {
     })
 
     const renderButtonLoginAndRegister = () => {
-        const token = localStorage.getItem("user");
         if (token) {
             return <div className="user">
                 <Button className="btn-user" onClick={event => { handleClickAnchorElClick(event) }}>
                     <img src={userDefault} alt="user image" />
-                    <p>{props.user.hoTen}</p>
+                    <p>{userLocalStorageParse.hoTen}</p>
                 </Button>
                 <Menu
                     anchorEl={anchorEl}
