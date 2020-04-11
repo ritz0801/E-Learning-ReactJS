@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { withRouter } from "react-router-dom";
 import _ from "lodash";
 import Skeleton from "react-loading-skeleton";
 import Rating from "@material-ui/lab/Rating";
@@ -15,7 +14,7 @@ const CourseItem = (props) => {
                         src={props.course.hinhAnh}
                         alt=""
                         onLoad={() => {
-                            let delay = _.debounce(() => setIsLoading(false), 10);
+                            let delay = _.debounce(() => setIsLoading(false), 5);
                             delay();
                         }}
                     />
