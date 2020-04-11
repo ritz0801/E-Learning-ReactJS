@@ -2,9 +2,17 @@ import React, { useState } from 'react';
 import _ from "lodash";
 import Skeleton from "react-loading-skeleton";
 import Rating from "@material-ui/lab/Rating";
+import { withRouter } from "react-router-dom";
+import { getCourseDetail } from "../../../Redux/Actions/courses";
+import { connect } from "react-redux";
 
 const CourseItem = (props) => {
     const [isLoading, setIsLoading] = useState(true);
+
+    const goToCourseDetail = () => {
+        props.history.push(`/course-detail/${props.course._id}`);
+        props.getCourseDetail(props.course._id);
+    }
 
     return (
         <div className="course-item_container mb-4">
@@ -49,7 +57,7 @@ const CourseItem = (props) => {
                             <Skeleton width="100%" height="41px" />
                         </div>
                     ) : (
-                            <button className="btn w-100">
+                            <button onClick={goToCourseDetail} className="btn w-100">
                                 XEM CHI TIẾT
                             </button>
                         )}
@@ -59,4 +67,4 @@ const CourseItem = (props) => {
     );
 };
 
-export default CourseItem;
+export default connect(null, { getCourseDetail })(withRouter(CourseItem));
