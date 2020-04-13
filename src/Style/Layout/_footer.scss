@@ -1,72 +1,89 @@
 .footer {
-    .footer_head {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: $sp-2;
-        .footer_menu {
-            text-align: left;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+    background-color: #222;
 
-            //list-style-type: none;
-            padding: 0 $sp-4;
-            // li {
-            //     margin: $sp-1 /2 0;
-            //     a {
-            //       text-decoration: none;
-            //       @include Text($medium,$fw-normal,$blue);
-            //     }
-            // }
+    .footer_container {
+        .title {
+            color: #f8f8f8;
+            font-size: 13px;
+            margin-bottom: 8px;
         }
-        // .footer_language {
-        //     // width: 10%;
-        //     text-align: right;
-        //     padding: $sp-1 $sp-4;
-        //     display: flex;
-        //     border: solid 1px black;
-        //     height: fit-content;
-        //     margin: 0 $sp-3;
-        //     i {
-        //         align-self: center;
-        //     }
-        //     p {
-        //         @include Text($medium,$fw-normal,black);
-        //         margin: 0;
-        //         margin-right: $sp-5;
-        //         margin-left: $sp-1;
 
-        //     }
-        // }
+        .rule {
+            display: block;
+            color: #949494;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 5px;
+            &:hover {
+                color: #fff;
+            }
+        }
+
+        .iconPartner {
+            width: 30px;
+            height: 30px;
+            border-radius: 30px;
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+        .line {
+            height: 1px;
+            background-color: #4a4a4a;
+        }
+
+        .pProductOf {
+            color: #fff;
+            font-size: 13px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .pAddressAndTax {
+            color: #949494;
+            font-size: 13px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .elearningImg {
+            border-radius: 8px;
+            width: 80px;
+            height: 40px;
+        }
+
+        .boCongThuong {
+            width: 130px;
+            height: 50px;
+        }
     }
-    .footer_end {
-        padding: $sp-5 $sp-3;
-        display: flex;
-        justify-content: space-between;
-        border-top: solid 1px #ccc;
-        border-bottom: solid 5px $red;
-        .copyright {
-            display: flex;
-            align-items: center;
-            a {
-                display: inline-block;
-                width: 100px;
-                margin-right: $sp-1;
-                img {
-                    width: 100%;
-                }
-            }
-            p {
-                margin: 0;
-                @include Text($medium, $fw-normal, $grey);
-            }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .pProductOf,
+    .pAddressAndTax {
+        margin-left: 30px !important;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .rule_container {
+        width: 365%;
+
+        .rule_container_right {
+            display: flex !important;
+            justify-content: space-between;
+            text-align: center;
+            width: 100%;
+            margin: auto;
         }
-        .policy {
-            a {
-                text-decoration: none;
-                @include Text($medium, $fw-normal, $blue);
-                margin-right: $sp-1;
-            }
-        }
+    }
+}
+
+@media (max-width: 991.98px) {
+    .hideOnMobile {
+        display: none !important;
     }
 }

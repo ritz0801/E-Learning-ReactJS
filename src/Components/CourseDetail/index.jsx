@@ -89,6 +89,7 @@ const CourseDetail = (props) => {
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star-half-o"></i>
                             </div>
+                            <p className="coursedetail_card_price">{props.courseDetail.gia}</p>
                             <button className="btn btn--red_big coursedetail_card_btn">GHI DANH</button>
                         </div>
                     </div>

@@ -59,6 +59,18 @@
         position: relative;
         .courseName {
             font-size: 16px;
+            height: 35px;
+            max-height: 42px;
+            font-family: sans-serif;
+            line-height: 22px;
+            margin-bottom: 0;
+            overflow: hidden;
+            font-weight: bold;
+            opacity: 1;
+            transition: all 0.2s;
+        }
+        .coursePrice {
+            font-size: 16px;
             height: 42px;
             max-height: 42px;
             font-family: sans-serif;
@@ -99,6 +111,9 @@
         }
         .course-item_detail {
             .courseName {
+                opacity: 0;
+            }
+            .coursePrice {
                 opacity: 0;
             }
             .btn_viewDetail {

@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import { connect } from 'react-redux';
 import apiUser from '../../API/user';
 import { login, register, logout } from '../../Redux/Actions/user';
+import { getCourseDetail } from '../../Redux/Actions/courses';
 import Swal from "sweetalert2";
 import userDefault from '../../Assets/img/user-default.png';
 
@@ -22,13 +23,16 @@ const Header = (props) => {
         if (token && userLocalStorage) {
             props.login(userLocalStorageParse);
         }
-    }, [])
+    }, [token, userLocalStorage])
 
     const [openLogin, setOpenLogin] = useState(false);
     const [openRegister, setOpenRegister] = useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [fullWidth, setFullWidth] = React.useState(true);
     const [maxWidth, setMaxWidth] = React.useState('sm');
+    const [keyWord, setKeyWord] = React.useState("");
+    const [searchCoursesList, setSearchCoursesList] = React.useState([]);
+    const [isSearch, setIsSearch] = React.useState(false);
 
     const handleClicLoginkOpen = () => {
         setOpenLogin(true);
@@ -52,6 +56,46 @@ const Header = (props) => {
 
     const handleCloseAnchorEl = () => {
         setAnchorEl(null);
+    }
+
+    const onSearchCourse = (keyWord) => {
+        let searchList = props.coursesList.filter((course) => {
+            return course.tenKhoaHoc.toLowerCase().indexOf(keyWord.toLowerCase()) !== -1;
+        })
+        if (keyWord !== "") {
+            setIsSearch(true);
+            setSearchCoursesList(searchList);
+        }
+        else {
+            setIsSearch(false);
+            setSearchCoursesList([]);
+        }
+    }
+
+    const onChange = (e) => {
+        setKeyWord(e.target.value);
+        onSearchCourse(keyWord);
+    }
+
+    const gotoCourseDetail = (_id) => {
+        props.history.push(`/course-detail/${_id}`);
+        props.getCourseDetail(_id);
+        setIsSearch(false);
+        setKeyWord("");
+        setSearchCoursesList([]);
+    }
+
+    const renderSearchList = () => {
+        if (searchCoursesList.length !== 0 && isSearch === true && keyWord !== "") {
+            return <ul className="course-search-list">
+                {searchCoursesList.map((course, index) => {
+                    return <li onClick={() => gotoCourseDetail(course._id)} index={index} className="course-search-item">{course.tenKhoaHoc}</li>
+                })}
+            </ul>
+        }
+        else {
+            return null;
+        }
     }
 
     const registerSchema = yup.object().shape({
@@ -115,10 +159,11 @@ const Header = (props) => {
                         </NavLink>
                         <div className="myNavBar_search">
                             <form className="input-group ">
-                                <input type="text" className="form-control" placeholder="Tìm khóa học bạn quan tâm..." />
+                                <input name="keyWord" id="keyWord" value={keyWord} type="text" className="form-control" placeholder="Tìm khóa học bạn quan tâm..." onChange={onChange} />
                                 <div className="input-group-append">
                                     <span className="btn input-group-text"><i className="fa fa-search" /></span>
                                 </div>
+                                {renderSearchList()}
                             </form>
                         </div>
                     </div>
@@ -283,6 +328,7 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
     return {
         user: state.userReducer,
+        coursesList: state.coursesReducer,
     }
 }
 
@@ -296,6 +342,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         logout: () => {
             dispatch(logout());
+        },
+        getCourseDetail: (_id) => {
+            dispatch(getCourseDetail(_id));
         }
     }
 }

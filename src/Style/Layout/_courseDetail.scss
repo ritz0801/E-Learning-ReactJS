@@ -43,6 +43,9 @@
                 @include Text($h6, $fw-normal, $yellow);
             }
         }
+        .coursedetail_card_price {
+            @include Text($h6, $fw-bold, $black);
+        }
         .coursedetail_card_content {
             @include Text($medium, $fw-normal, $black);
         }

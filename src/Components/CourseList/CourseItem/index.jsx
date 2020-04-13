@@ -51,6 +51,9 @@ const CourseItem = (props) => {
                 <p className="courseName text-center">
                     {isLoading ? <Skeleton /> : props.course.tenKhoaHoc}
                 </p>
+                <p className="coursePrice text-center">
+                    {isLoading ? <Skeleton /> : props.course.gia}
+                </p>
                 <div className="btn_viewDetail">
                     {isLoading ? (
                         <div className="btn loading">

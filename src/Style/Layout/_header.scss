@@ -1,5 +1,6 @@
 .myNavBar {
     border-bottom: solid 1px $border;
+    position: relative;
     .navbar-brand {
         flex-grow: 1;
         img {
@@ -15,41 +16,60 @@
     }
     .myNavBar_search {
         flex-grow: 5;
-        input {
-            border: none;
-            background-color: $lightGrey;
-            transition: none;
-            height: 45px;
-            &::placeholder {
-                @include Text($medium, $fw-light, $grey);
-            }
-            &:focus {
-                box-shadow: none;
-                background-color: $white;
-                border-top: 1px solid $border;
-                border-bottom: 1px solid $border;
-                border-left: 1px solid $border;
-            }
-            &:focus + .input-group-append {
-                .input-group-text {
-                    background-color: $white;
-                    color: $red;
-                    border-top: 1px solid $border;
-                    border-bottom: 1px solid $border;
-                    border-right: 1px solid $border;
-                }
-            }
-        }
-        .input-group-append {
-            .input-group-text {
-                font-size: $h6;
-                color: $red;
+        .input-group {
+            input {
                 border: none;
                 background-color: $lightGrey;
-                &:hover {
-                    background-color: $red;
-                    color: $white;
-                    border-left: none;
+                transition: none;
+                height: 45px;
+                &::placeholder {
+                    @include Text($medium, $fw-light, $grey);
+                }
+                &:focus {
+                    box-shadow: none;
+                    background-color: $white;
+                    border-top: 1px solid $border;
+                    border-bottom: 1px solid $border;
+                    border-left: 1px solid $border;
+                }
+                &:focus + .input-group-append {
+                    .input-group-text {
+                        background-color: $white;
+                        color: $red;
+                        border-top: 1px solid $border;
+                        border-bottom: 1px solid $border;
+                        border-right: 1px solid $border;
+                    }
+                }
+            }
+            .input-group-append {
+                .input-group-text {
+                    font-size: $h6;
+                    color: $red;
+                    border: none;
+                    background-color: $lightGrey;
+                    &:hover {
+                        background-color: $red;
+                        color: $white;
+                        border-left: none;
+                    }
+                }
+            }
+            .course-search-list {
+                list-style-type: none;
+                position: absolute;
+                background-color: $lightGrey-2;
+                width: 100%;
+                z-index: 1000;
+                top: 100%;
+                border-radius: 2px;
+                .course-search-item {
+                    margin-top: 3px;
+                    margin-bottom: 3px;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: $border;
+                    }
                 }
             }
         }
