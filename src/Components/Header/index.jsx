@@ -125,7 +125,7 @@ const Header = (props) => {
                     onClose={handleCloseAnchorEl}
                     className="dropdown-user"
                 >
-                    <MenuItem onClick={handleCloseAnchorEl}>Thông tin cá nhân</MenuItem>
+                    <MenuItem onClick={handleCloseAnchorEl}>Khoá học của tôi</MenuItem>
                     <MenuItem
                         onClick={() => {
                             handleCloseAnchorEl();
