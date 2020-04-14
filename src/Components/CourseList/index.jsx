@@ -119,9 +119,9 @@ const CourseList = (props) => {
                 </li>
             </ul>
 
-            <div className="tab-content container">
+            <div className="tab-content container-fluid w-75">
                 <div className="tab-pane fade show active" id="pills-frontendCourses">
-                    <Slider {...settings} className="courses-list container">
+                    <Slider {...settings} className="courses-list container-fluid">
                         {isLoading
                             ? Array.from({ length: 4 }).map((item, index) => {
                                 return (
@@ -137,17 +137,17 @@ const CourseList = (props) => {
                     </Slider>
                 </div>
                 <div className="tab-pane fade" id="pills-backendCourses" role="tabpanel">
-                    <Slider {...settings} className="courses-list container">
+                    <Slider {...settings} className="courses-list container-fluid">
                         {renderCoursesListByCatalog("Backend")}
                     </Slider>
                 </div>
                 <div className="tab-pane fade" id="pills-mobileCourses" role="tabpanel">
-                    <Slider {...settings} className="courses-list container">
+                    <Slider {...settings} className="courses-list container-fluid">
                         {renderCoursesListByCatalog("Mobile")}
                     </Slider>
                 </div>
                 <div className="tab-pane fade" id="pills-designCourses" role="tabpanel">
-                    <Slider {...settings} className="courses-list container">
+                    <Slider {...settings} className="courses-list container-fluid">
                         {renderCoursesListByCatalog("Design")}
                     </Slider>
                 </div>

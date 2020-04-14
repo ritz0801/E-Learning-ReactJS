@@ -2,8 +2,8 @@
     padding-top: $sp-7;
     overflow: hidden;
     .slick-arrow.slick-prev {
-        top: 400px;
-        left: -40px;
+        top: 370px;
+        left: -10px;
         z-index: 1;
         width: 50px;
         height: 100px;
@@ -11,8 +11,8 @@
         transition: color 0.2s;
     }
     .slick-arrow.slick-next {
-        top: 400px;
-        right: -50px;
+        top: 370px;
+        right: -25px;
         color: $darkRed;
         width: 50px;
         height: 100px;

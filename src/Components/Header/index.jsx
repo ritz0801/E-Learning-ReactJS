@@ -34,7 +34,7 @@ const Header = (props) => {
     const [searchCoursesList, setSearchCoursesList] = React.useState([]);
     const [isSearch, setIsSearch] = React.useState(false);
 
-    const handleClicLoginkOpen = () => {
+    const handleClickLoginkOpen = () => {
         setOpenLogin(true);
     };
 
@@ -125,7 +125,7 @@ const Header = (props) => {
                     onClose={handleCloseAnchorEl}
                     className="dropdown-user"
                 >
-                    <MenuItem onClick={handleCloseAnchorEl}>Khoá học của tôi</MenuItem>
+                    <MenuItem onClick={handleCloseAnchorEl}>Thông tin cá nhân</MenuItem>
                     <MenuItem
                         onClick={() => {
                             handleCloseAnchorEl();
@@ -139,7 +139,7 @@ const Header = (props) => {
         }
         else {
             return <div className="button d-flex">
-                <button className="btn mr-1 btn--white" type="submit" onClick={handleClicLoginkOpen}>Đăng nhập</button>
+                <button className="btn mr-1 btn--white" type="submit" onClick={handleClickLoginkOpen}>Đăng nhập</button>
                 <button className="btn btn--red" type="submit" onClick={handleClickRegisterOpen}>Đăng ký</button>
             </div>
         }
@@ -173,9 +173,9 @@ const Header = (props) => {
                 <div className="col-xl-4 col-lg-3 col-md-4 col-sm-4">
                     <div className="collapse navbar-collapse" id="collapsibleNavId">
                         <ul className="navbar-nav">
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <i className="fa fa-shopping-cart" />
-                            </li>
+                            </li> */}
                             <li className="nav-item ">
                                 {
                                     renderButtonLoginAndRegister()
@@ -221,7 +221,7 @@ const Header = (props) => {
                                             icon: 'error',
                                             confirmButtonColor: '#e74c3c',
                                             confirmButtonText: 'Ok'
-                                        }).then(() => handleClicLoginkOpen())
+                                        }).then(() => handleClickLoginkOpen())
                                     }
                                 })
                         }}
@@ -274,7 +274,15 @@ const Header = (props) => {
                                         confirmButtonText: 'Ok'
                                     })
                                 })
-                                .catch(err => console.login(err))
+                                .catch((err) => {
+                                    if (err.response.status === 401)
+                                        Swal.fire({
+                                            title: 'Tài khoản đã tồn tại!',
+                                            icon: 'error',
+                                            confirmButtonColor: '#e74c3c',
+                                            confirmButtonText: 'Ok'
+                                        }).then(() => handleClickRegisterOpen())
+                                })
                         }}
                         render={(formikProps) => {
                             return <Form >

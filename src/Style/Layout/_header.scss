@@ -11,7 +11,7 @@
     }
     .myNavBar_categories {
         flex-grow: 1;
-        @include Text($medium, $fw-normal, $grey);
+        @include Text($regular, $fw-normal, $grey);
         align-self: center;
     }
     .myNavBar_search {
@@ -23,7 +23,7 @@
                 transition: none;
                 height: 45px;
                 &::placeholder {
-                    @include Text($medium, $fw-light, $grey);
+                    @include Text($regular, $fw-light, $grey);
                 }
                 &:focus {
                     box-shadow: none;
@@ -80,7 +80,7 @@
         width: 100%;
         .nav-item {
             .nav-link {
-                @include Text($medium, $fw-normal, $grey);
+                @include Text($regular, $fw-normal, $grey);
                 padding: $sp-1 $sp-1;
                 align-self: center;
             }
@@ -125,13 +125,14 @@
             background-color: transparent;
         }
         img {
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            margin-right: 5px;
+            margin-right: 7px;
         }
         p {
             margin-bottom: 0;
+            font-size: $regular;
         }
     }
 }

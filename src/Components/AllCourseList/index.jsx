@@ -52,8 +52,8 @@ const AllCourseList = (props) => {
     }
 
     return (
-        <div className="mt-4 all-courses-list">
-            <Slider {...settings} className="courses-list container">
+        <div className="mt-4 all-courses-list w-75 container-fluid">
+            <Slider {...settings} className="courses-list container-fluid">
                 {renderCourseList()}
             </Slider>
         </div>

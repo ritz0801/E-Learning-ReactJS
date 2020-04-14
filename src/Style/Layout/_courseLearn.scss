@@ -1,0 +1,47 @@
+.course_learn_container {
+    width: 100%;
+    margin: 0;
+    .colLeft_wrap {
+        margin: 0;
+        padding: 0;
+        height: 580px;
+        overflow-y: auto;
+        .colLeft_container {
+            background-color: $lightGrey;
+            border: solid 1px $lightGrey-3;
+            border-bottom: solid 3px $lightGrey-3;
+            border-radius: 5px;
+            height: 100%;
+            margin: 0;
+            .colLeft_item {
+                @include Text($regular + 2, $fw-normal, $black);
+                padding: 10px;
+                align-items: center;
+                border-bottom: solid 1px $lightGrey-3;
+                transition: all 0.2s;
+                &:hover {
+                    cursor: pointer;
+                    background-color: $lightRed;
+                }
+                p {
+                    margin-bottom: 0;
+                    cursor: default;
+                }
+            }
+        }
+    }
+    .colRight_wrap {
+        width: 100% !important;
+        height: 100% !important;
+        padding: 0;
+        .MuiBox-root {
+            padding: 0;
+            height: 580px;
+            width: 100% !important;
+            iframe {
+                height: 580px;
+                width: 100% !important;
+            }
+        }
+    }
+}

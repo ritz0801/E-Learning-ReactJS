@@ -33,7 +33,7 @@ const CourseDetail = (props) => {
 
     const renderRelatedCourses = (catalog) => {
         let coursesListByCatalog = props.coursesList.filter((course) => {
-            return course.maDanhMuc === catalog
+            return course.maDanhMuc === catalog;
         })
 
         return coursesListByCatalog.map((course, index) => {
@@ -41,6 +41,19 @@ const CourseDetail = (props) => {
                 <CourseItem course={course} />
             </div>
         })
+    }
+
+    const renderCoursesContent = () => {
+        return props.courseDetail.mucLuc && props.courseDetail.mucLuc.map((course, index) => {
+            return <li index={index} className="coursedetail_content_item d-flex justify-content-between">
+                <p className="coursedetail_content_item_title">{course.tieuDe}</p>
+                <p className="coursedetail_content_item_time">2 phút</p>
+            </li>
+        })
+    }
+
+    const goToCourseLearn = () => {
+        props.history.push(`/course-learn/${props.courseDetail._id}`);
     }
 
     const settings = {
@@ -64,20 +77,23 @@ const CourseDetail = (props) => {
 
             <div className='row'>
                 <div className='col-md-8 coursedetail_content'>
-                    <div className='coursedetail_content-top'>
-                        <h3>Mô tả khóa học</h3>
-
-                    </div>
-
+                    <h3 className="mb-0">Mô tả khóa học</h3>
                     <p className='coursedetail_detail'>
                         {props.courseDetail.moTa} <br />
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing <br />
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                     </p>
+
+                    <ul className="coursedetail_content pl-0">
+                        <h3 className="mb-4">Nội dung khoá học</h3>
+                        <div className="coursedetail_content_item_container">
+                            {renderCoursesContent()}
+                        </div>
+                    </ul>
                 </div>
 
                 <div className='mt-4 col-md-4'>
-                    <div className="card coursedetail_card text-center" style={{ width: '18rem' }}>
+                    <div className="card coursedetail_card text-center" style={{ width: '22rem' }}>
                         <img src={props.courseDetail.hinhAnh} className="card-img-top" alt="hinhkhoahoc" />
                         <div className="card-body">
                             <h5 className="coursedetail_card_title">{props.courseDetail.tenKhoaHoc}</h5>
@@ -89,15 +105,15 @@ const CourseDetail = (props) => {
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star-half-o"></i>
                             </div>
-                            <p className="coursedetail_card_price">{props.courseDetail.gia}</p>
-                            <button className="btn btn--red_big coursedetail_card_btn">GHI DANH</button>
+                            {/* <p className="coursedetail_card_price">{props.courseDetail.gia}</p> */}
+                            <button onClick={goToCourseLearn} className="btn btn--red_big coursedetail_card_btn">VÀO HỌC MIỄN PHÍ</button>
                         </div>
                     </div>
                 </div>
 
-                <div className='related_course text-center container-fluid'>
+                <div className='related_course text-center container-fluid w-75'>
                     <h4 className="related_course_title">Các khóa học cùng lĩnh vực có thể bạn quan tâm</h4>
-                    <Slider {...settings} className="courses-list container">
+                    <Slider {...settings} className="courses-list container-fluid">
                         {renderRelatedCourses(props.courseDetail.maDanhMuc)}
                     </Slider>
 
