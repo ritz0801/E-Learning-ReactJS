@@ -5,6 +5,9 @@ import CourseItem from '../CourseList/CourseItem';
 import Slider from "react-slick";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import Swal from "sweetalert2";
+import { toggleLogin } from "../../Redux/Actions/dialog";
+import { Redirect } from 'react-router-dom';
 
 const NextArrow = ({ className, style, onClick }) => {
     return (
@@ -45,7 +48,7 @@ const CourseDetail = (props) => {
 
     const renderCoursesContent = () => {
         return props.courseDetail.mucLuc && props.courseDetail.mucLuc.map((course, index) => {
-            return <li index={index} className="coursedetail_content_item d-flex justify-content-between">
+            return <li key={index} className="coursedetail_content_item d-flex justify-content-between">
                 <p className="coursedetail_content_item_title">{course.tieuDe}</p>
                 <p className="coursedetail_content_item_time">2 phút</p>
             </li>
@@ -130,4 +133,15 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getCourseDetail })(CourseDetail);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        toggleLogin: () => {
+            dispatch(toggleLogin());
+        },
+        getCourseDetail: (_id) => {
+            dispatch(getCourseDetail(_id));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CourseDetail);

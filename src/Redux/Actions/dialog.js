@@ -1,7 +1,13 @@
 import * as Types from '../Constants/dialog';
 
-export const toggle = () => {
+export const toggleLogin = () => {
     return {
-        type: Types.TOOGLE
+        type: Types.TOGGLE_LOGIN
     };
 };
+
+export const toggleRegister = () => {
+    return {
+        type: Types.TOGGLE_REGISTER
+    }
+}

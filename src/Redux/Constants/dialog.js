@@ -1,1 +1,2 @@
-export const TOOGLE = 'TOGGLE';
+export const TOGGLE_LOGIN = 'TOGGLE_LOGIN';
+export const TOGGLE_REGISTER = 'TOGGLE_REGISTER';

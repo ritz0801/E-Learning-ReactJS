@@ -8,6 +8,7 @@ import AllCourseList from '../Components/AllCourseList';
 import CourseDetail from '../Components/CourseDetail';
 import ScrollToTop from '../Containers/ScrollToTop';
 import CourseLearn from '../Components/CourseLearn';
+import UserAuth from '../Components/Authentication/userAuth';
 
 const Layout = () => {
     return (
@@ -18,7 +19,8 @@ const Layout = () => {
                 <Route path="/" exact component={HomePage} />
                 <Route path="/all-courses" exact component={AllCourseList} />
                 <Route path="/course-detail/:_id" exact component={CourseDetail} />
-                <Route path="/course-learn/:_id" exact component={CourseLearn} />
+                <UserAuth path="/course-learn/:_id" exact component={CourseLearn} />
+                {/* <Route path="/course-learn/:_id" exact component={CourseLearn} /> */}
             </Switch>
             <Footer />
         </Router>
