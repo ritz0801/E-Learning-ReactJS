@@ -76,7 +76,7 @@ const CourseLearn = (props) => {
                 {props.courseDetail.mucLuc && props.courseDetail.mucLuc.map((video, index) => {
                     return (
                         <TabPanel value={value} index={index} key={index}>
-                            <iframe src="https://www.youtube.com/embed/J7u6hWHuUq0" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                            <iframe src={video.linkVideo} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                         </TabPanel>
                     );
                 })}

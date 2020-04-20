@@ -60,6 +60,10 @@ const Header = (props) => {
         setSearchCoursesList([]);
     }
 
+    const goToProfile = (_id) => {
+        props.history.push(`/profile/${_id}`);
+    }
+
     const renderSearchList = () => {
         if (searchCoursesList.length !== 0 && isSearch === true && keyWord !== "") {
             return <ul className="course-search-list">
@@ -87,7 +91,7 @@ const Header = (props) => {
                     onClose={handleCloseAnchorEl}
                     className="dropdown-user"
                 >
-                    <MenuItem onClick={handleCloseAnchorEl}>Thông tin cá nhân</MenuItem>
+                    <MenuItem onClick={() => { goToProfile(userLocalStorageParse._id); handleCloseAnchorEl() }}>Thông tin cá nhân</MenuItem>
                     <MenuItem
                         onClick={() => {
                             handleCloseAnchorEl();

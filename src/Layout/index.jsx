@@ -9,6 +9,7 @@ import CourseDetail from '../Components/CourseDetail';
 import ScrollToTop from '../Containers/ScrollToTop';
 import CourseLearn from '../Components/CourseLearn';
 import UserAuth from '../Components/Authentication/userAuth';
+import Profile from '../Components/Profile';
 
 const Layout = () => {
     return (
@@ -21,6 +22,7 @@ const Layout = () => {
                 <Route path="/course-detail/:_id" exact component={CourseDetail} />
                 <UserAuth path="/course-learn/:_id" exact component={CourseLearn} />
                 {/* <Route path="/course-learn/:_id" exact component={CourseLearn} /> */}
+                <Route path="/profile/:_id" exact component={Profile} />
             </Switch>
             <Footer />
         </Router>
