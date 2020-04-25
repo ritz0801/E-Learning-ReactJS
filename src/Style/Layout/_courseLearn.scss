@@ -1,46 +1,35 @@
 .course_learn_container {
-    width: 100%;
-    margin: 0;
-    .colLeft_wrap {
-        margin: 0;
-        padding: 0;
-        height: 580px;
-        overflow-y: auto;
-        .colLeft_container {
-            background-color: $lightGrey;
-            border: solid 1px $lightGrey-3;
-            border-bottom: solid 3px $lightGrey-3;
-            border-radius: 5px;
-            height: 100%;
-            margin: 0;
-            .colLeft_item {
-                @include Text($regular + 2, $fw-normal, $black);
-                padding: 10px;
-                align-items: center;
-                border-bottom: solid 1px $lightGrey-3;
-                transition: all 0.2s;
-                &:hover {
-                    cursor: pointer;
-                    background-color: $lightRed;
-                }
-                p {
-                    margin-bottom: 0;
-                    cursor: default;
-                }
-            }
-        }
+    h3 {
+        color: #007be8;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
-    .colRight_wrap {
-        width: 100% !important;
-        height: 100% !important;
-        padding: 0;
-        .MuiBox-root {
-            padding: 0;
-            height: 580px;
-            width: 100% !important;
-            iframe {
-                height: 580px;
-                width: 100% !important;
+    .lesson_list {
+        .card {
+            margin-bottom: 16px;
+            .card-body {
+                .lesson_list_item_title {
+                    color: #7a8994;
+                    font-weight: 500;
+                }
+                .lesson_list_item_button {
+                    button {
+                        padding-left: 16px;
+                        padding-right: 16px;
+                        line-height: 20px;
+                        min-width: 120px;
+                        border: 1px solid #f2f4f5;
+                        &:hover {
+                            color: #333;
+                            background-color: #fafafa;
+                            border: 1px solid rgba(122, 137, 148, 0.27);
+                        }
+                        &:focus {
+                            outline: none !important;
+                            box-shadow: none;
+                        }
+                    }
+                }
             }
         }
     }

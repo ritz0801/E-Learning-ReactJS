@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { getCourseDetail } from '../../Redux/Actions/courses';
-import CourseItem from '../CourseList/CourseItem';
-import Slider from "react-slick";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import Swal from "sweetalert2";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import Slider from "react-slick";
+import { getCourseDetail } from '../../Redux/Actions/courses';
 import { toggleLogin } from "../../Redux/Actions/dialog";
-import { Redirect } from 'react-router-dom';
+import CourseItem from '../CourseList/CourseItem';
 
 const NextArrow = ({ className, style, onClick }) => {
     return (

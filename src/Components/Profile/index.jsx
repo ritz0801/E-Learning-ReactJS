@@ -1,8 +1,10 @@
+import { Field, Form, Formik } from 'formik';
 import React from 'react';
-import userDefault from '../../Assets/img/user-default.png';
 import { connect } from "react-redux";
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import userDefault from '../../Assets/img/user-default.png';
+import apiUser from '../../API/user';
+import Swal from "sweetalert2";
 
 const Profile = (props) => {
     const profileSchema = yup.object().shape({
@@ -14,7 +16,7 @@ const Profile = (props) => {
         const day = d.getDate();
         const month = d.getMonth() + 1;
         const year = d.getFullYear();
-        console.log(day, month, year)
+
         return [day, month, year].join('/');
     }
 
@@ -25,15 +27,30 @@ const Profile = (props) => {
                     <div className="card-body">
                         <Formik
                             initialValues={{
-                                hoTen: props.user.hoTen,
-                                taiKhoan: props.user.taiKhoan,
                                 matKhau: '',
-                                soDienThoai: props.user.soDienThoai,
-                                email: props.user.email,
                             }}
                             validationSchema={profileSchema}
                             onSubmit={values => {
-
+                                apiUser
+                                    .put(`SuaThongTin?_id=${props.user._id}`, values)
+                                    .then((result) => {
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "Bạn đã đổi mật khẩu thành công",
+                                            confirmButtonColor: '#e74c3c',
+                                            confirmButtonText: 'Ok'
+                                        })
+                                    })
+                                    .catch((err) => {
+                                        if (err.response.status === 401) {
+                                            Swal.fire({
+                                                title: 'Bạn đã đổi mật khẩu thất bại',
+                                                icon: 'error',
+                                                confirmButtonColor: '#e74c3c',
+                                                confirmButtonText: 'Ok'
+                                            })
+                                        }
+                                    })
                             }}
                             render={(formikProps) => {
                                 return <Form >
@@ -68,7 +85,7 @@ const Profile = (props) => {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="matKhau">Mật khẩu: </label>
-                                        <Field id="matKhau" type="password" className="form-control matKhau" name="matKhau" placeHolder="Mật khẩu mới" onChange={formikProps.handleChange} />
+                                        <Field id="matKhau" type="password" className="form-control matKhau" name="matKhau" placeholder="Mật khẩu mới" onChange={formikProps.handleChange} />
                                     </div>
                                     <div className="text-center">
                                         <button type="submit" disabled={!(formikProps.isValid && formikProps.dirty)} className="btn btn-primary m-2">LƯU</button>
