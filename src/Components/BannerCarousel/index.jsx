@@ -25,8 +25,8 @@ const BannerCarousel = () => {
                     <div className="col-md-4 intro_item">
                         <i className="fa fa-history intro_icon" />
                         <div className="icon_content">
-                            <p>HỖ TRỢ LIÊN TỤC</p>
-                            <p>Nhóm chat với hàng ngàn thành viên thân thiện giúp đỡ nhau</p>
+                            <p>HOÀN TOÀN MIỄN PHÍ</p>
+                            <p>Cung cấp cho bạn những khoá học chất lượng hoàn toàn miễn phí</p>
                         </div>
                     </div>
                 </div>
