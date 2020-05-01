@@ -1,15 +1,24 @@
 import { Field, Form, Formik } from 'formik';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
-import * as yup from 'yup';
-import userDefault from '../../Assets/img/user-default.png';
 import apiUser from '../../API/user';
 import Swal from "sweetalert2";
+import { uploadAvatar } from '../../Redux/Actions/user';
 
 const Profile = (props) => {
-    const profileSchema = yup.object().shape({
-        matKhau: yup.string().required(),
-    })
+    const [avatar, setAvatar] = useState(props.user.avatar);
+
+    const userLocalStorage = localStorage.getItem("user");
+    const userLocalStorageParse = JSON.parse(userLocalStorage);
+
+    useEffect(() => {
+        if (userLocalStorage)
+            setAvatar(userLocalStorageParse.avatar)
+    }, [])
+
+    // const profileSchema = yup.object().shape({
+    //     matKhau: yup.string().required(),
+    // })   
 
     const getDayMonthYear = (time) => {
         const d = new Date(time);
@@ -20,6 +29,13 @@ const Profile = (props) => {
         return [day, month, year].join('/');
     }
 
+    const handleChangeImage = (event) => {
+        setAvatar(URL.createObjectURL(event.target.files[0]));
+        const formData = new FormData();
+        formData.append("avatar", event.target.files[0]);
+        props.uploadAvatar(props.user._id, formData)
+    }
+
     return (
         <div className="profile_container">
             <div className="card_wrap container">
@@ -28,11 +44,12 @@ const Profile = (props) => {
                         <Formik
                             initialValues={{
                                 matKhau: '',
+
                             }}
-                            validationSchema={profileSchema}
+                            // validationSchema={profileSchema}
                             onSubmit={values => {
                                 apiUser
-                                    .put(`SuaThongTin?_id=${props.user._id}`, values)
+                                    .put(`DoiMatKhau?_id=${props.user._id}`, values)
                                     .then((result) => {
                                         Swal.fire({
                                             icon: "success",
@@ -40,9 +57,10 @@ const Profile = (props) => {
                                             confirmButtonColor: '#e74c3c',
                                             confirmButtonText: 'Ok'
                                         })
+                                        console.log(values);
                                     })
                                     .catch((err) => {
-                                        if (err.response.status === 401) {
+                                        if (err.response.status === 400) {
                                             Swal.fire({
                                                 title: 'Bạn đã đổi mật khẩu thất bại',
                                                 icon: 'error',
@@ -55,8 +73,8 @@ const Profile = (props) => {
                             render={(formikProps) => {
                                 return <Form >
                                     <div className="profile_avatar">
-                                        <label className="profile_avatar_label" style={{ backgroundImage: `url(${userDefault})`, width: "84px", height: "84px" }}>
-                                            <input type="file" className="profile_avatar_input" />
+                                        <label className="profile_avatar_label" style={{ backgroundImage: `url(${avatar})`, width: "90px", height: "90px" }}>
+                                            <input name="avatar" id="avatar" type="file" className="profile_avatar_input" onChange={(event) => handleChangeImage(event)} />
                                         </label>
                                     </div>
                                     <div className="form-group">
@@ -88,7 +106,13 @@ const Profile = (props) => {
                                         <Field id="matKhau" type="password" className="form-control matKhau" name="matKhau" placeholder="Mật khẩu mới" onChange={formikProps.handleChange} />
                                     </div>
                                     <div className="text-center">
-                                        <button type="submit" disabled={!(formikProps.isValid && formikProps.dirty)} className="btn btn-primary m-2">LƯU</button>
+                                        <button
+                                            type="submit"
+                                            // disabled={!(formikProps.isValid && formikProps.dirty)}
+                                            className="btn btn-primary m-2"
+                                        >
+                                            LƯU
+                                            </button>
                                     </div>
                                 </Form>
                             }} />
@@ -105,4 +129,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(Profile);
+export default connect(mapStateToProps, { uploadAvatar })(Profile);

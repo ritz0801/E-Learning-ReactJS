@@ -4,14 +4,6 @@ const initialState = {};
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        // case types.LOGIN_WITH_FB: {
-        //   localStorage.setItem("user", JSON.stringify(action.user));
-        //   return action.user;
-        // }
-        // case types.LOGIN_WITH_GG: {
-        //   localStorage.setItem("user", JSON.stringify(action.user));
-        //   return action.user;
-        // }
         case types.LOGIN: {
             localStorage.setItem("token", JSON.stringify(action.user.token));
             localStorage.setItem("user", JSON.stringify(action.user));
@@ -21,6 +13,9 @@ const userReducer = (state = initialState, action) => {
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             return {};
+        }
+        case types.UPLOAD_AVATAR: {
+            localStorage.setItem("user", JSON.stringify(action.payload));
         }
         default:
             return state;

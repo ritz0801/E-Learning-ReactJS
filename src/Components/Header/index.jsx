@@ -81,7 +81,7 @@ const Header = (props) => {
         if (token) {
             return <div className="user">
                 <Button className="btn-user" onClick={event => { handleClickAnchorElClick(event) }}>
-                    <img src={userDefault} alt="user image" />
+                    <img src={props.user.avatar} alt="user image" />
                     <p>{userLocalStorageParse.hoTen}</p>
                 </Button>
                 <Menu
