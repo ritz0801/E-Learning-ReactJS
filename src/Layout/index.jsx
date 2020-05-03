@@ -1,21 +1,19 @@
 import React from 'react';
-import Header from "../Components/Header";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import "../Style/main.scss";
-import Footer from "../Components/Footer";
-import HomePage from './HomePage';
+import { Route, Switch } from 'react-router-dom';
 import AllCourseList from '../Components/AllCourseList';
-import CourseDetail from '../Components/CourseDetail';
-import ScrollToTop from '../Containers/ScrollToTop';
-import CourseLearn from '../Components/CourseLearn';
 import UserAuth from '../Components/Authentication/userAuth';
-import Profile from '../Components/Profile';
+import CourseDetail from '../Components/CourseDetail';
+import CourseLearn from '../Components/CourseLearn';
+import Footer from "../Components/Footer";
+import Header from "../Components/Header";
 import Lesson from '../Components/Lesson';
+import Profile from '../Components/Profile';
+import "../Style/main.scss";
+import HomePage from './HomePage';
 
-const Layout = () => {
+const Layout = (props) => {
     return (
-        <Router>
-            <ScrollToTop />
+        <Route>
             <Header />
             <Switch>
                 <Route path="/" exact component={HomePage} />
@@ -27,7 +25,7 @@ const Layout = () => {
                 <UserAuth path="/profile/:_id" exact component={Profile} />
             </Switch>
             <Footer />
-        </Router>
+        </Route>
     );
 };
 

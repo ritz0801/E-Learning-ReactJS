@@ -6,6 +6,7 @@ const AdminAuth = ({ component: Component, ...props }) => {
     return (
         <Route {...props} render={routeProps => {
             const user = JSON.parse(localStorage.getItem('user'));
+            const userParse = JSON.parse(user);
             if (user) {
                 if (user.maLoaiNguoiDung === 'AD') {
                     return <Component {...routeProps} />
@@ -18,7 +19,7 @@ const AdminAuth = ({ component: Component, ...props }) => {
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Ok'
             })
-            return <Redirect to='/' />
+            return <Redirect to='/admin/login' />
         }} />
     );
 };
