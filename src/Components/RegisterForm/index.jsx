@@ -19,7 +19,7 @@ const RegisterForm = (props) => {
         hoTen: yup.string().required('* Không được bỏ trống!'),
         taiKhoan: yup.string().required('* Không được bỏ trống!'),
         matKhau: yup.string().required('* Không được bỏ trống!'),
-        soDT: yup.string().required('* Không được bỏ trống!').matches(/^[0-9]+$/),
+        soDienThoai: yup.string().required('* Không được bỏ trống!').matches(/^[0-9]+$/),
         email: yup.string().required('* Không được bỏ trống!').email('* Sai định dạng Email!'),
     })
 
@@ -34,7 +34,7 @@ const RegisterForm = (props) => {
                             hoTen: '',
                             taiKhoan: '',
                             matKhau: '',
-                            soDT: '',
+                            soDienThoai: '',
                             email: '',
                         }}
                         validationSchema={registerSchema}
@@ -83,9 +83,9 @@ const RegisterForm = (props) => {
                                     </ErrorMessage>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="soDT">Số điện thoại: </label>
-                                    <Field id="soDT" type="text" className="form-control" name="soDT" onChange={formikProps.handleChange} />
-                                    <ErrorMessage name="soDT">
+                                    <label htmlFor="soDienThoai">Số điện thoại: </label>
+                                    <Field id="soDienThoai" type="text" className="form-control" name="soDienThoai" onChange={formikProps.handleChange} />
+                                    <ErrorMessage name="soDienThoai">
                                         {(msg) => <div className="alert alert-danger">{msg}</div>}
                                     </ErrorMessage>
                                 </div>
