@@ -74,8 +74,8 @@ const LoginForm = (props) => {
                                     </ErrorMessage>
                                 </div>
                                 <div className="text-center">
-                                    <Button onClick={props.toggleLogin}>Cancel</Button>
                                     <button type="submit" onClick={props.toggleLogin} disabled={!(formikProps.isValid && formikProps.dirty)} className="btn btn-danger m-2">ĐĂNG NHẬP</button>
+                                    <Button onClick={props.toggleLogin}>Huỷ</Button>
                                 </div>
                             </Form>
                         }} />

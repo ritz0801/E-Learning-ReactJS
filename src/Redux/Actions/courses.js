@@ -28,3 +28,10 @@ export const getCourseDetail = (_id) => {
             });
     }
 }
+
+export const addCourse = (course) => {
+    return {
+        type: Types.ADD_COURSE,
+        payload: course,
+    }
+}

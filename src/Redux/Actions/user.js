@@ -38,3 +38,16 @@ export const uploadAvatar = (_id, formData) => {
             })
     }
 }
+
+export const getStudentList = () => {
+    return (dispatch) => {
+        apiUser
+            .get('LayDanhSachHocVien')
+            .then((result) => {
+                return dispatch({
+                    type: Types.GET_STUDENT_LIST,
+                    payload: result.data.students,
+                })
+            });
+    };
+};

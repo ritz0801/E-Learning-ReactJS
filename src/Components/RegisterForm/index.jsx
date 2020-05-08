@@ -44,7 +44,7 @@ const RegisterForm = (props) => {
                                 .then((result) => {
                                     Swal.fire({
                                         icon: "success",
-                                        title: "Đăng kí thành công",
+                                        title: "Đăng ký thành công",
                                         confirmButtonColor: '#e74c3c',
                                         confirmButtonText: 'Ok'
                                     })
@@ -97,8 +97,8 @@ const RegisterForm = (props) => {
                                     </ErrorMessage>
                                 </div>
                                 <div className="text-center">
-                                    <Button onClick={props.toggleRegister}>Cancel</Button>
                                     <button type="submit" onClick={props.toggleRegister} disabled={!(formikProps.isValid && formikProps.dirty)} className="btn btn-danger m-2">ĐĂNG KÝ</button>
+                                    <Button onClick={props.toggleRegister}>Huỷ</Button>
                                 </div>
                             </Form>
                         }} />

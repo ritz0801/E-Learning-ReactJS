@@ -1,25 +1,20 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import Swal from "sweetalert2";
 
 const AdminAuth = ({ component: Component, ...props }) => {
+    const userLocalStorage = localStorage.getItem("user");
+    const userLocalStorageParse = JSON.parse(userLocalStorage);
     return (
         <Route {...props} render={routeProps => {
-            const user = JSON.parse(localStorage.getItem('user'));
-            const userParse = JSON.parse(user);
-            if (user) {
-                if (user.maLoaiNguoiDung === 'AD') {
-                    return <Component {...routeProps} />
-                }
-                return <Redirect to='/' />;
+            if (userLocalStorage && userLocalStorageParse.maLoaiNguoiDung === "AD") {
+                return <Component {...routeProps} />
             }
-            Swal.fire({
-                title: 'Bạn chưa đăng nhập!',
-                icon: 'warning',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Ok'
-            })
-            return <Redirect to='/admin/login' />
+            else if (userLocalStorage && userLocalStorageParse.maLoaiNguoiDung === "HV") {
+                return <Redirect to='/' />
+            }
+            else {
+                return <Redirect to='/admin/login' />
+            }
         }} />
     );
 };
