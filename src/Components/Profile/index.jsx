@@ -56,7 +56,6 @@ const Profile = (props) => {
                                             confirmButtonColor: '#e74c3c',
                                             confirmButtonText: 'Ok'
                                         })
-                                        console.log(values);
                                     })
                                     .catch((err) => {
                                         if (err.response.status === 400) {

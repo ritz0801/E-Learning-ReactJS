@@ -10,11 +10,15 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getCoursesList } from '../../../Redux/Actions/courses';
+import apiCourse from '../../../API/courses';
+import Swal from "sweetalert2";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -47,6 +51,7 @@ const headCells = [
     { id: 'tenKhoaHoc', numeric: false, disablePadding: false, label: 'Tên khoá học' },
     { id: 'taiKhoanNguoiTao', numeric: false, disablePadding: false, label: 'Tài khoản người tạo' },
     { id: 'maDanhMuc', numeric: false, disablePadding: false, label: 'Mã danh mục' },
+    { id: 'hanhDong', numeric: false, disablePadding: false, label: '' },
 ];
 
 function EnhancedTableHead(props) {
@@ -197,6 +202,20 @@ const CourseList = (props) => {
         setPage(0);
     };
 
+    const deleteCourse = (_id) => {
+        Swal.fire({
+            title: 'Bạn có chắc muốn xoá?',
+            icon: 'warning',
+            confirmButtonColor: '#e74c3c',
+            confirmButtonText: 'Ok',
+            showCancelButton: true
+        }).then(() => {
+            apiCourse
+                .delete(`XoaKhoaHoc?_id=${_id}`)
+                .then(() => props.getCoursesList())
+        })
+    }
+
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (
@@ -229,6 +248,7 @@ const CourseList = (props) => {
                                             <TableCell align="left">{row.tenKhoaHoc}</TableCell>
                                             <TableCell align="left">{row.taiKhoanNguoiTao}</TableCell>
                                             <TableCell align="left">{row.maDanhMuc}</TableCell>
+                                            <TableCell align="left"><Button size="small" variant="contained" color="secondary" startIcon={<DeleteIcon />} onClick={() => { deleteCourse(row._id) }}>Xoá</Button></TableCell>
                                         </TableRow>
                                     );
                                 })}

@@ -22,12 +22,9 @@ const NavBar = (props) => {
                     <li className="admin_navbar_li"><p className="admin_navbar_content" onClick={goToCourseList}>Danh sách khoá học</p></li>
                     <li className="admin_navbar_li"><p className="admin_navbar_content" onClick={goToStudentList}>Danh sách học viên</p></li>
                     <li className="admin_navbar_li"><p className="admin_navbar_content" onClick={goToAddCourse}>Thêm khoá học</p></li>
-                    <li className="admin_navbar_li"><p className="admin_navbar_content">Xoá khoá học</p></li>
                     <li className="admin_navbar_li"><p className="admin_navbar_content">Sửa khoá học</p></li>
                     <li className="admin_navbar_li"><p className="admin_navbar_content">Tìm học viên theo ID</p></li>
                     <li className="admin_navbar_li"><p className="admin_navbar_content">Tìm học viên theo tài khoản</p></li>
-                    <li className="admin_navbar_li"><p className="admin_navbar_content">Xoá học viên theo ID</p></li>
-                    <li className="admin_navbar_li"><p className="admin_navbar_content">Xoá học viên theo tài khoản</p></li>
                 </ul>
             </div>
         </div>

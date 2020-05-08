@@ -11,10 +11,14 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import apiUser from '../../../API/user';
 import { getStudentList } from '../../../Redux/Actions/user';
+import Swal from "sweetalert2";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -49,6 +53,7 @@ const headCells = [
     { id: 'soDienThoai', numeric: false, disablePadding: false, label: 'Số điện thoại' },
     { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
     { id: 'ngayTao', numeric: false, disablePadding: false, label: 'Ngày tạo' },
+    { id: 'hanhDong', numeric: false, disablePadding: false, label: '' },
 ];
 
 function EnhancedTableHead(props) {
@@ -208,6 +213,20 @@ const StudentList = (props) => {
         return [day, month, year].join('/');
     }
 
+    const deleteStudent = (_id) => {
+        Swal.fire({
+            title: 'Bạn có chắc muốn xoá?',
+            icon: 'warning',
+            confirmButtonColor: '#e74c3c',
+            confirmButtonText: 'Ok',
+            showCancelButton: true
+        }).then(() => {
+            apiUser
+                .delete(`XoaHocVien?_id=${_id}`)
+                .then(() => props.getStudentList())
+        })
+    }
+
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (
@@ -242,6 +261,7 @@ const StudentList = (props) => {
                                             <TableCell align="left">{row.soDienThoai}</TableCell>
                                             <TableCell align="left">{row.email}</TableCell>
                                             <TableCell align="left">{getDayMonthYear(row.ngayTao)}</TableCell>
+                                            <TableCell align="left"><Button size="small" variant="contained" color="secondary" startIcon={<DeleteIcon />} onClick={() => { deleteStudent(row._id) }}>Xoá</Button></TableCell>
                                         </TableRow>
                                     );
                                 })}
