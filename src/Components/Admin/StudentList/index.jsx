@@ -223,7 +223,14 @@ const StudentList = (props) => {
         }).then(() => {
             apiUser
                 .delete(`XoaHocVien?_id=${_id}`)
-                .then(() => props.getStudentList())
+                .then(() => {
+                    Swal.fire({
+                        title: 'Đã xoá học viên thành công!',
+                        icon: 'success',
+                        confirmButtonColor: '#e74c3c',
+                        confirmButtonText: 'Ok',
+                    }).then(() => props.getStudentList())
+                })
         })
     }
 

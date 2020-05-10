@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import apiCourse from '../../../../API/courses';
 import { connect } from 'react-redux';
+import Swal from "sweetalert2";
 
 const InputAddLesson = (props) => {
     const addLessonSchema = yup.object().shape({
@@ -21,6 +22,14 @@ const InputAddLesson = (props) => {
                 apiCourse
                     .post("ThemBaiHoc", values, {
                         params: { _id: props.courseDetail._id }
+                    })
+                    .then(() => {
+                        Swal.fire({
+                            title: 'Thêm thành công! Muốn thêm bài học tiếp hãy chọn nút THÊM BÀI HỌC, muốn hoàn thành cập nhật mục lục chọn nút HOÀN THÀNH',
+                            icon: 'success',
+                            confirmButtonColor: '#e74c3c',
+                            confirmButtonText: 'Ok',
+                        })
                     })
             }}
             render={(formikProps) => {

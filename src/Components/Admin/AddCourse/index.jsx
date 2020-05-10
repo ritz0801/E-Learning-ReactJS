@@ -46,6 +46,14 @@ const AddCourse = (props) => {
     const doneAddCourse = () => {
         apiCourse
             .post(`ThemBaiHocVaoMucLuc?_id=${props.courseDetail._id}`)
+            .then(() => {
+                Swal.fire({
+                    title: 'Đã hoàn thành cập nhật mục lục!',
+                    icon: 'success',
+                    confirmButtonColor: '#e74c3c',
+                    confirmButtonText: 'Ok',
+                })
+            })
     }
 
     const removeLessonInput = (i) => {
@@ -54,7 +62,7 @@ const AddCourse = (props) => {
 
     return (
         <div className="addCourse_wrapper container">
-            <Stepper activeStep={activeStep} alternativeLabel>
+            <Stepper className="mb-3" activeStep={activeStep} alternativeLabel>
                 {steps.map((label) => (
                     <Step key={label}>
                         <StepLabel>{label}</StepLabel>

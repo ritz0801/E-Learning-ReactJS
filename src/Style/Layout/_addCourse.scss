@@ -1,5 +1,8 @@
 .addCourse_wrapper {
-    margin-top: 100px;
+    margin-top: 50px;
+    .MuiStepper-root {
+        background-color: #fafafa;
+    }
     .addLesson_wrapper {
         display: flex;
         flex-direction: column;

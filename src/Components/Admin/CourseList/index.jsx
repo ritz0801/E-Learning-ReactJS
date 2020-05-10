@@ -12,6 +12,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
@@ -19,6 +20,7 @@ import { connect } from 'react-redux';
 import { getCoursesList } from '../../../Redux/Actions/courses';
 import apiCourse from '../../../API/courses';
 import Swal from "sweetalert2";
+import { Link } from 'react-router-dom';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -132,6 +134,7 @@ const EnhancedTableToolbar = (props) => {
             <Typography className={classes.title} variant="h5" id="tableTitle" component="div">
                 Danh sách khoá học
             </Typography>
+            <Link to='/admin/addcourse'><Button className="addCourseBtn" size="small" variant="contained" color="primary" startIcon={<CloudUploadIcon />} style={{ width: '150px', height: '42px', marginTop: '15px', marginRight: '8px', fontSize: '12px' }}>THÊM KHOÁ HỌC</Button></Link>
         </Toolbar>
     );
 };
@@ -212,7 +215,14 @@ const CourseList = (props) => {
         }).then(() => {
             apiCourse
                 .delete(`XoaKhoaHoc?_id=${_id}`)
-                .then(() => props.getCoursesList())
+                .then(() => {
+                    Swal.fire({
+                        title: 'Đã xoá khoá học thành công!',
+                        icon: 'success',
+                        confirmButtonColor: '#e74c3c',
+                        confirmButtonText: 'Ok',
+                    }).then(() => props.getCoursesList())
+                })
         })
     }
 
