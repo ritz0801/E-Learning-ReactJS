@@ -78,7 +78,7 @@ const Admin = (props) => {
         <div>
             <div className={classes.toolbar} />
             <List>
-                {['DANH SÁCH KHOÁ HỌC', 'DANH SÁCH HỌC VIÊN', 'THÊM KHOÁ HỌC', 'SỬA KHOÁ HỌC'].map((text, index) => (
+                {['DANH SÁCH KHOÁ HỌC', 'DANH SÁCH HỌC VIÊN', 'THÊM KHOÁ HỌC'].map((text, index) => (
                     <ListItem button index={index} key={index} onClick={() => { goToRoute(index) }}>
                         <ListItemText primary={text} />
                     </ListItem>

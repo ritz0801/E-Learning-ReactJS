@@ -13,7 +13,8 @@ const AdminHome = (props) => {
     }, [])
 
     return (
-        <div>
+        <div className="d-flex justify-content-center align-items-center">
+            <h4 className="text-center">Xin chào! Bạn đã đăng nhập thành công vào trang quản trị.</h4>
         </div>
     );
 };

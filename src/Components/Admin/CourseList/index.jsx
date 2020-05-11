@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import SaveIcon from '@material-ui/icons/Save';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
@@ -53,7 +54,8 @@ const headCells = [
     { id: 'tenKhoaHoc', numeric: false, disablePadding: false, label: 'Tên khoá học' },
     { id: 'taiKhoanNguoiTao', numeric: false, disablePadding: false, label: 'Tài khoản người tạo' },
     { id: 'maDanhMuc', numeric: false, disablePadding: false, label: 'Mã danh mục' },
-    { id: 'hanhDong', numeric: false, disablePadding: false, label: '' },
+    { id: 'xoaKhoaHoc', numeric: false, disablePadding: false, label: '' },
+    { id: 'suaKhoaHoc', numeric: false, disablePadding: false, label: '' },
 ];
 
 function EnhancedTableHead(props) {
@@ -226,6 +228,10 @@ const CourseList = (props) => {
         })
     }
 
+    const editCourse = (_id) => {
+        props.history.push(`/admin/editcourse/${_id}`)
+    }
+
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (
@@ -259,6 +265,7 @@ const CourseList = (props) => {
                                             <TableCell align="left">{row.taiKhoanNguoiTao}</TableCell>
                                             <TableCell align="left">{row.maDanhMuc}</TableCell>
                                             <TableCell align="left"><Button size="small" variant="contained" color="secondary" startIcon={<DeleteIcon />} onClick={() => { deleteCourse(row._id) }}>Xoá</Button></TableCell>
+                                            <TableCell align="left"><Button size="small" variant="contained" color="default" startIcon={<SaveIcon />} onClick={() => { editCourse(row._id) }}>Sửa</Button></TableCell>
                                         </TableRow>
                                     );
                                 })}

@@ -21,6 +21,7 @@ import AdminLoginForm from './Components/Admin/LoginForm';
 import AddCourse from './Components/Admin/AddCourse';
 import CourseList from './Components/Admin/CourseList';
 import StudentList from './Components/Admin/StudentList';
+import EditCourse from './Components/Admin/EditCourse';
 
 // IMPORT STYLE
 import './Style/main.scss';
@@ -39,6 +40,7 @@ function App(props) {
           <Admin path="/admin">
             <Switch>
               <Route path="/admin/login" exact component={AdminLoginForm} />
+              <AdminAuth path='/admin/editcourse/:_id' exact component={EditCourse} />
               <AdminAuth path="/admin/studentlist" exact component={StudentList} />
               <AdminAuth path="/admin/courselist" exact component={CourseList} />
               <AdminAuth path="/admin/addcourse" exact component={AddCourse} />

@@ -52,7 +52,7 @@ const AddCourse = (props) => {
                     icon: 'success',
                     confirmButtonColor: '#e74c3c',
                     confirmButtonText: 'Ok',
-                })
+                }).then(() => { props.history.push('/admin/courselist') })
             })
     }
 
