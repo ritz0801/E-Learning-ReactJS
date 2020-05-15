@@ -4,8 +4,8 @@
     .navbar-brand {
         flex-grow: 1;
         img {
-            width: 100px;
-            height: 40px;
+            width: 120px;
+            height: 60px;
             object-fit: cover;
         }
     }
@@ -22,6 +22,7 @@
                 background-color: $lightGrey;
                 transition: none;
                 height: 45px;
+                margin-top: 13px;
                 &::placeholder {
                     @include Text($regular, $fw-light, $grey);
                 }
@@ -48,6 +49,7 @@
                     color: $red;
                     border: none;
                     background-color: $lightGrey;
+                    margin-top: 13px;
                     &:hover {
                         background-color: $red;
                         color: $white;
@@ -125,20 +127,20 @@
             background-color: transparent;
         }
         img {
-            width: 35px;
-            height: 35px;
+            width: 47px;
+            height: 47px;
             border-radius: 50%;
             margin-right: 7px;
         }
         p {
             margin-bottom: 0;
-            font-size: $regular;
+            font-size: 17px;
         }
     }
 }
 .dropdown-user {
     z-index: 1401 !important;
     .MuiPaper-rounded {
-        top: 55px !important;
+        top: 70px !important;
     }
 }

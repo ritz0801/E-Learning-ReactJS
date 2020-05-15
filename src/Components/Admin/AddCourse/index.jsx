@@ -57,7 +57,9 @@ const AddCourse = (props) => {
     }
 
     const removeLessonInput = (i) => {
-        setLessonInput(lessonInput.filter((item, index) => index !== i));
+        let lessonInputCopy = [...lessonInput];
+        lessonInputCopy.splice(i, 1);
+        setLessonInput(lessonInputCopy);
     }
 
     return (

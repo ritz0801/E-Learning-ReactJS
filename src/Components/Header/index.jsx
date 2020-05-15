@@ -105,8 +105,6 @@ const Header = (props) => {
         }
         else {
             return <div className="button d-flex">
-                {/* <button className="btn mr-1 btn--white" type="submit" onClick={handleClickLoginkOpen}>Đăng nhập</button>
-                <button className="btn btn--red" type="submit" onClick={handleClickRegisterOpen}>Đăng ký</button> */}
                 <LoginForm />
                 <RegisterForm />
             </div>

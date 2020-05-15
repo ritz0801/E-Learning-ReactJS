@@ -13,9 +13,10 @@ const InputAddLesson = (props) => {
 
     return (
         <Formik
+            enableReinitialize
             initialValues={{
-                tieuDe: props.item.tieuDe,
-                linkVideo: props.item.linkVideo,
+                tieuDe: '',
+                linkVideo: '',
             }}
             validationSchema={addLessonSchema}
             onSubmit={values => {
