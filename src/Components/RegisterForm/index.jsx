@@ -19,7 +19,7 @@ const RegisterForm = (props) => {
         hoTen: yup.string().required('* Không được bỏ trống!'),
         taiKhoan: yup.string().required('* Không được bỏ trống!'),
         matKhau: yup.string().required('* Không được bỏ trống!'),
-        soDienThoai: yup.string().required('* Không được bỏ trống!').matches(/^[0-9]+$/),
+        soDienThoai: yup.string().required('* Không được bỏ trống!').matches(/(09|01|02|03|04|05|06|07|08[2|6|8|9])+([0-9]{8})\b/, '* Số điện thoại không đúng định dạng!').length(10, '* Số điện thoại có tối đa 10 số!'),
         email: yup.string().required('* Không được bỏ trống!').email('* Sai định dạng Email!'),
     })
 
