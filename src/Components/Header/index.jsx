@@ -96,6 +96,7 @@ const Header = (props) => {
                         onClick={() => {
                             handleCloseAnchorEl();
                             props.logout();
+                            props.history.push('/');
                         }}
                     >
                         Đăng xuất

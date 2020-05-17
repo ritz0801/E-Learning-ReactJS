@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import apiUser from '../../API/user';
 import Swal from "sweetalert2";
-import { uploadAvatar } from '../../Redux/Actions/user';
+import { uploadAvatar, logout } from '../../Redux/Actions/user';
 
 const Profile = (props) => {
     const [avatar, setAvatar] = useState(props.user.avatar);
@@ -55,7 +55,8 @@ const Profile = (props) => {
                                             title: "Bạn đã đổi mật khẩu thành công",
                                             confirmButtonColor: '#e74c3c',
                                             confirmButtonText: 'Ok'
-                                        })
+                                        }).then(() => props.logout())
+                                            .then(() => props.history.push('/'))
                                     })
                                     .catch((err) => {
                                         if (err.response.status === 400) {
@@ -127,4 +128,15 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { uploadAvatar })(Profile);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        uploadAvatar: (_id, formData) => {
+            dispatch(uploadAvatar(_id, formData))
+        },
+        logout: () => {
+            dispatch(logout());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
