@@ -149,7 +149,7 @@ const AddCourse = (props) => {
                             </div>
                             <div className="text-center">
                                 <button type="submit" disabled={!(formikProps.isValid && formikProps.dirty)} className="btn btn-danger m-2">THÊM KHOÁ HỌC</button>
-                                <Button onClick={formikProps.handleReset}>RESET</Button>
+                                <Button onClick={formikProps.handleReset}>ĐẶT LẠI</Button>
                             </div>
                         </Form>
                     }} />
