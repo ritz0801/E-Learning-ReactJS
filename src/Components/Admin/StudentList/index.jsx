@@ -220,17 +220,22 @@ const StudentList = (props) => {
             confirmButtonColor: '#e74c3c',
             confirmButtonText: 'Ok',
             showCancelButton: true
-        }).then(() => {
-            apiUser
-                .delete(`XoaHocVien?_id=${_id}`)
-                .then(() => {
-                    Swal.fire({
-                        title: 'Đã xoá học viên thành công!',
-                        icon: 'success',
-                        confirmButtonColor: '#e74c3c',
-                        confirmButtonText: 'Ok',
-                    }).then(() => props.getStudentList())
-                })
+        }).then((result) => {
+            if (result.value) {
+                apiUser
+                    .delete(`XoaHocVien?_id=${_id}`)
+                    .then(() => {
+                        Swal.fire({
+                            title: 'Đã xoá học viên thành công!',
+                            icon: 'success',
+                            confirmButtonColor: '#e74c3c',
+                            confirmButtonText: 'Ok',
+                        }).then(() => props.getStudentList())
+                    })
+            }
+            else if (result.dismiss === Swal.DismissReason.cancel) {
+                return;
+            }
         })
     }
 

@@ -214,17 +214,22 @@ const CourseList = (props) => {
             confirmButtonColor: '#e74c3c',
             confirmButtonText: 'Ok',
             showCancelButton: true
-        }).then(() => {
-            apiCourse
-                .delete(`XoaKhoaHoc?_id=${_id}`)
-                .then(() => {
-                    Swal.fire({
-                        title: 'Đã xoá khoá học thành công!',
-                        icon: 'success',
-                        confirmButtonColor: '#e74c3c',
-                        confirmButtonText: 'Ok',
-                    }).then(() => props.getCoursesList())
-                })
+        }).then((result) => {
+            if (result.value) {
+                apiCourse
+                    .delete(`XoaKhoaHoc?_id=${_id}`)
+                    .then(() => {
+                        Swal.fire({
+                            title: 'Đã xoá khoá học thành công!',
+                            icon: 'success',
+                            confirmButtonColor: '#e74c3c',
+                            confirmButtonText: 'Ok',
+                        }).then(() => props.getCoursesList())
+                    })
+            }
+            else if (result.dismiss === Swal.DismissReason.cancel) {
+                return;
+            }
         })
     }
 
